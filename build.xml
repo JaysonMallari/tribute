@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="gitBuildAnt" default="war" >
+	
+	<target name="war" depends="createWebXml">
+		<war destfile="index.war" webxml="./web.xml">
+			<fileset dir="./index" />
+			
+			<lib dir="./thirdparty">
+			</lib>
+			
+			<classes dir="./web" />
+		</war>
+	</target>
+	
+	<target name="createWebXml" depends="jar">
+		<touch file="web.xml" />
+	</target>
+	
+	<target name="jar" depends="mkfolder">
+		<jar destfile="./index.jar" basedir="./jarfolder" />
+	</target>
+	
+	<target name="mkfolder" depends="clean">
+		<mkdir dir="jarfolder" />
+		<mkdir dir="index" />
+		<mkdir dir="thirdparty" />
+		<mkdir dir="web" />
+	</target>
+
+	<target name="clean">
+		<delete dir="index" />
+		<delete dir="jarfolder" />
+		<delete dir="thirdparty" />
+		<delete dir="web" />
+	</target>
+
+</project>
